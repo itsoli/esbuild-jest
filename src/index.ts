@@ -1,36 +1,28 @@
-
-import { relative, extname } from 'path'
-import fs from 'fs'
 import { createHash } from 'crypto'
-import Debug from 'debug'
-import { transformSync, Loader } from 'esbuild'
+import fs from 'fs'
+import { relative, extname } from 'path'
 import { Transformer } from '@jest/transform'
+import { transformSync, Loader } from 'esbuild'
 import { resolveOptions } from './options'
 import { UserOptions } from './type'
 
-const debug = Debug('jest-esbuild')
-
 const THIS_FILE = fs.readFileSync(__filename)
-const TS_TSX_REGEX = /\.tsx?$/
-const JS_JSX_REGEX = /\.jsx?$/
 
 function isTarget(path: string) {
-  return JS_JSX_REGEX.test(path) || TS_TSX_REGEX.test(path)
+  return /\.[jt]sx?$/.test(path)
 }
 
 declare module '@jest/types' {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Config {
     interface ConfigGlobals {
-      'jest-esbuild'?: UserOptions
+      'esbuild-jest'?: UserOptions
     }
   }
 }
 
 const createTransformer = (userOptions: UserOptions = {}): Transformer<UserOptions> => {
   const options = resolveOptions(userOptions)
-
-  debug('%O', options)
 
   return {
     canInstrument: true,
@@ -62,7 +54,7 @@ const createTransformer = (userOptions: UserOptions = {}): Transformer<UserOptio
 
       const result = transformSync(source, {
         ...options,
-        ...config.globals['jest-esbuild'] as UserOptions,
+        ...config.globals['esbuild-jest'] as UserOptions,
         loader: userOptions.loader || extname(path).slice(1) as Loader,
       })
 

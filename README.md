@@ -1,21 +1,19 @@
-# Jest esbuild
+# esbuild-jest
 
-[![npm version](https://badgen.net/npm/v/jest-esbuild)](https://www.npmjs.com/package/jest-esbuild)
-
-A Jest esbuild transformer
+A Jest transformer using esbuild
 
 ## Install
 
 ```bash
-npm install -D jest-esbuild
+npm install -D @ohpz/esbuild-jest
 ```
 
-Set `transform` TypeScript file to `jest-esbuild` inside `jest.config.js`
+Set `transform` TypeScript file to `@ohpz/esbuild-jest` inside `jest.config.js`
 
 ```json5
 {
   "transform": {
-    "^.+\\.tsx?$": "jest-esbuild"
+    "^.+\\.tsx?$": "@ohpz/esbuild-jest"
   }
 }
 ```
@@ -28,7 +26,7 @@ const esbuildOptions = {}
 module.export = {
   transform: {
     "^.+\\.tsx?$": [
-      "jest-esbuild",
+      "@ohpz/esbuild-jest",
       esbuildOptions
     ]
   }

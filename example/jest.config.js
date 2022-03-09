@@ -1,3 +1,3 @@
 module.exports = {
-  preset: 'jest-esbuild',
+  preset: '@ohpz/esbuild-jest',
 }

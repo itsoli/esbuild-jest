@@ -1,45 +1,43 @@
 {
-  "name": "jest-esbuild",
+  "name": "@ohpz/esbuild-jest",
   "description": "A Jest esbuild transformer.",
-  "version": "0.2.6",
+  "version": "0.3.0",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "license": "MIT",
   "author": "hannoeru <me@hanlee.co>",
+  "contributors": [
+    "Oliver Paschke <oli.paschke@gmail.com>"
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/hannoeru/jest-esbuild"
+    "url": "https://github.com/itsoli/esbuild-jest"
   },
-  "homepage": "https://github.com/hannoeru/jest-esbuild",
-  "bugs": "https://github.com/hannoeru/jest-esbuild/issues",
+  "homepage": "https://github.com/itsoli/esbuild-jest",
+  "bugs": "https://github.com/itsoli/esbuild-jest/issues",
   "files": [
     "dist",
     "jest-preset.js",
     "LICENSE"
   ],
   "scripts": {
-    "dev": "npm run build -- --watch",
-    "build": "tsup src/index.ts --dts --format cjs,esm",
-    "prepublishOnly": "npm run build",
-    "release": "bumpp --commit --tag --push",
+    "build:esm": "esbuild src/index.ts --bundle --platform=node --target=node12 --external:esbuild --format=esm --outfile=dist/index.mjs",
+    "build:cjs": "esbuild src/index.ts --bundle --platform=node --target=node12 --external:esbuild --format=cjs --outfile=dist/index.js",
+    "build:types": "tsc --declaration --emitDeclarationOnly --outFile dist/index.d.ts",
     "example:test": "npm -C example run test"
   },
-  "dependencies": {
-    "debug": "^4.3.2",
-    "esbuild": "^0.13.15"
-  },
   "peerDependencies": {
-    "jest": "^27.0.3"
+    "esbuild": "^0.14.25",
+    "jest": "^27.5.1"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.10.0",
-    "@hannoeru/eslint-config": "^0.3.5",
-    "@jest/transform": "^27.3.1",
-    "@types/debug": "^4.1.7",
-    "bumpp": "^7.1.1",
-    "eslint": "^8.3.0",
-    "tsup": "^5.9.2",
-    "typescript": "^4.5.2"
+    "@jest/transform": "^27.5.1",
+    "@types/node": "^16.11.7",
+    "@typescript-eslint/eslint-plugin": "^5.14.0",
+    "@typescript-eslint/parser": "^5.14.0",
+    "esbuild": "^0.14.25",
+    "eslint": "^8.10.0",
+    "typescript": "^4.6.2"
   }
 }

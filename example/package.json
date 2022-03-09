@@ -3,12 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "test": "DEBUG=jest-esbuild* jest"
+    "test": "DEBUG=esbuild-jest* jest"
   },
   "devDependencies": {
-    "@jest/types": "^27.2.5",
-    "jest": "^27.3.1",
-    "jest-esbuild": "workspace:*",
-    "typescript": "^4.5.2"
+    "@jest/types": "^27.5.1",
+    "jest": "^27.5.1",
+    "@ohpz/esbuild-jest": "workspace:*",
+    "typescript": "^4.6.2"
   }
 }
